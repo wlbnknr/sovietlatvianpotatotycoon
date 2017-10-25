@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Soviet Latvian Potato Tycoon</title>
+	<meta name="description" content="Soviet Latvian Potato Tycoon" />
+	<style>
+	body {background: #B82A2A; font-family: Arial;}
+	
+	p {font-weight: bold;}
+	
+	#container {margin: 0 auto; background: #B82A2A;}
+	
+	button {
+	background-color:#b82a2a;
+	border:0.5rem solid #ffdd00;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:2rem;
+	padding:1rem 2rem;
+	text-decoration:none;
+	width: 20rem;
+    }
+	
+	button:active {
+	position:relative;
+	top:0.1rem;
+	}
+
+	#eat-potato {
+	display:none;
+	}
+
+	#add-peasant {
+	display:none;
+	}
+
+	#peasant-counter {
+	display:none;
+	}
+
+	#peasantCost-counter {
+	display:none;
+	}
+	
+	</style>
+</head>
+<body>
+
+<h1>Soviet Latvian Potato Tycoon</h1>
+
+<div id="container">
+
+<button id="add-potato">Dig potato</button>
+<button id="eat-potato">Eat potato soup</button>
+<button id="add-peasant">Exploit peasant</button>
+<p id="potato-counter">You have <span id="potato-count"></span> potato!</p>
+<p id="health-counter">You have <span id="health-count"></span> health.</p>
+<p id="eatCost-counter">Making of potato soup cost <span id="eatCost-count"></span> potato.</p>
+<p id="peasant-counter">You exploit <span id="peasant-count"></span> peasant.</p>
+<p id="peasantCost-counter">Exploit new peasant cost <span id="peasantCost-count"></span> potato.</p>
+
+</div>
+
+<script>
+
+var potato, health, peasant, peasantCost, eatCost;
+
+function starvation() {
+	if (health > 0) {
+		health--;
+		updateStats();
+	}
+	else {
+		alert("Potato and big business only hallucination of malnourish.\nLatvian peasant die in sadness.");
+		location.reload();
+	}	
+}
+
+function potatoPicking() {
+	potato += peasant;
+}
+
+function updateStats() {
+	document.getElementById("health-count").innerHTML = health;
+	document.getElementById("potato-count").innerHTML = potato;
+	document.getElementById("eatCost-count").innerHTML = eatCost;
+	document.getElementById("peasant-count").innerHTML = peasant;
+	document.getElementById("peasantCost-count").innerHTML = peasantCost;
+}
+
+
+function addPotato() {
+    potato += 10;
+		if (potato >= 10){
+		document.getElementById("eat-potato").style.display = "inline";}
+		if (potato >= 100){
+		document.getElementById("add-peasant").style.display = "inline";
+		document.getElementById("eatCost-counter").style.display = "block";
+		document.getElementById("peasant-counter").style.display = "block";
+		document.getElementById("peasantCost-counter").style.display = "block";}
+		updateStats();
+}
+
+function addPeasant() {
+	if (potato >= peasantCost) {
+		peasant++;
+		potato -= peasantCost;
+		peasantCost = Math.ceil(peasantCost * 1.1);
+		eatCost += 5 * peasant;
+		updateStats();
+	}
+	else{
+		updateStats();
+	}
+
+}
+
+function eatPotato() {
+	if (potato >= eatCost && health <= 95) {
+		potato -= eatCost;
+		health += 5;
+		updateStats();
+	}
+	else if (potato >= eatCost && health > 96) {
+		potato -= eatCost;
+		health = 100;
+		updateStats();
+	}
+	else {
+		updateStats();
+	}
+}
+
+document.getElementById("add-potato").onclick = function() {addPotato()};
+document.getElementById("eat-potato").onclick = function() {eatPotato()};
+document.getElementById("add-peasant").onclick = function() {addPeasant()};
+
+window.onload = function game () {
+	potato = 0;
+	health = 10;
+	peasant = 0;
+	peasantCost = 10;
+	eatCost = 5;
+	updateStats();
+	window.setInterval (function() {
+		starvation();
+		potatoPicking();
+	}, 1000);
+}
+
+</script>
+
+</body>
+</html>

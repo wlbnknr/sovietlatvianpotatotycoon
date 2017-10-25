@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Soviet Latvian Potato Tycoon</title>
+	<meta name="description" content="Soviet Latvian Potato Tycoon" />
+	<style>
+	body {background: #c00; font-family: Arial;}
+	
+	p {font-weight: bold;}
+	
+	#container {margin: 0 auto; background: #c00;}
+	
+	#produce-potato {
+	background-color:#c00;
+	border:4px solid #ffd700;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:22px;
+	padding:12px 24px;
+	text-decoration:none;
+    }
+	
+	#produce-potato:active {
+	position:relative;
+	top:1px;
+	}
+	
+	
+	</style>
+</head>
+<body>
+
+<h1>Soviet Latvian Potato Tycoon</h1>
+
+<div id="container">
+
+<button id="produce-potato" onclick="addPotato()">Dig potato</button>
+<p>You have <span id="potato-count">0</span> potato!</p>
+
+</div>
+
+<script>
+var potato = 0;
+
+
+function addPotato() {
+	if (potato < 50)
+	{
+    potato++;
+	document.getElementById("potato-count").innerHTML = potato;
+	console.log(potato);
+	}
+	else {
+	alert("Politburo come and take potato.\nPolitburo only execute peasant and not burn kolkhoz.\nPolitburo very generous.");
+	potato = 0;
+	document.getElementById("potato-count").innerHTML = potato;
+	}
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Soviet Latvian Potato Tycoon</title>
+	<meta name="description" content="Soviet Latvian Potato Tycoon" />
+	<style>
+	body {background: #c00; font-family: Arial;}
+	
+	p {font-weight: bold;}
+	
+	#container {margin: 0 auto; background: #c00;}
+	
+	button {
+	background-color:#c00;
+	border:4px solid #ffd700;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:22px;
+	padding:12px 24px;
+	text-decoration:none;
+	width: 10rem;
+	margin: 0 0 1rem 0;
+    }
+	
+	button:active {
+	position:relative;
+	top:1px;
+	}
+
+	#eat-potato {
+	display:none;
+	font-size:11px;
+	}
+
+
+	</style>
+</head>
+<body>
+
+<h1>Soviet Latvian Potato Tycoon</h1>
+
+<div id="container">
+
+<p>You have <span id="potato-count"></span> potato!</p>
+<p>You have <span id="health-count"></span> health.</p>
+<button id="produce-potato">Dig potato</button><br/>
+<button id="eat-potato">Eat potato soup<br/>(+2 health -10 potato)</button>
+</div>
+
+<script>
+
+var potato, health;
+
+function updateStats() {
+	document.getElementById("health-count").innerHTML = health;
+	document.getElementById("potato-count").innerHTML = potato;
+}
+
+function addPotato() {
+    potato++;
+		if (potato >= 10){
+		document.getElementById("eat-potato").style.display = "inline"};
+		if (potato >= 51) {
+		alert("When have 50 potato politburo come.\nPolitburo say \"Only kulak have this many potato\".\nPolitburo execute all peasant in kolkhoz and burn potato.\nPolitburo prudent.");
+		location.reload();
+		}
+		updateStats();
+}
+
+function eatPotato() {
+	if (potato >= 10) {
+		potato = potato - 10;
+		health = health + 2;
+		updateStats();
+	}
+}
+
+function starvation() {
+	if (health > 0) {
+		health--;
+		updateStats();
+	}
+	else {
+		alert("When health in kolkhoz not of best, politburo come.\nPolitburo say \"Only counterrevolutionary waste potato for soup\".\nPolitburo execute kolkhoz and take children for reeducate.\nChildren accomplish larger glory and potato for kolkhoz.\nPolitburo generous.");
+		location.reload();
+	}
+	
+}
+
+document.getElementById("produce-potato").onclick = function() {addPotato()};
+document.getElementById("eat-potato").onclick = function() {eatPotato()};
+
+window.onload = function game () {
+	potato = 0;
+	health = 10;
+	updateStats();
+	window.setInterval (starvation, 1000);
+}
+
+</script>
+
+</body>
+</html>

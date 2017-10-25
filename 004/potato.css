@@ -1,0 +1,27 @@
+body {background: #c00; font-family: Arial;}
+	
+	p {font-weight: bold;}
+
+	button {
+	background-color:#c00;
+	border:0.5rem solid #ffd700;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:2rem;
+	padding:1rem 2rem;
+	text-decoration:none;
+	width: 20rem;
+    }
+	
+	button:active {
+	position:relative;
+	top:0.1rem;
+	}
+	
+	.indicator {color: #ffd700;}
+
+	.hidden {display: none;}
+
+	#container {margin: 0 auto; background: #c00;}

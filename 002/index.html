@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Soviet Latvian Potato Tycoon</title>
+	<meta name="description" content="Soviet Latvian Potato Tycoon" />
+	<style>
+	body {background: #c00; font-family: Arial;}
+	
+	p {font-weight: bold;}
+	
+	#container {margin: 0 auto; background: #c00;}
+	
+	#produce-potato {
+	background-color:#c00;
+	border:4px solid #ffd700;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:22px;
+	padding:12px 24px;
+	text-decoration:none;
+    }
+	
+	#produce-potato:active {
+	position:relative;
+	top:1px;
+	}
+	
+	
+	</style>
+</head>
+<body>
+
+<h1>Soviet Latvian Potato Tycoon</h1>
+
+<div id="container">
+
+<button id="produce-potato">Dig potato</button>
+<p>You have <span id="potato-count"></span> potato!</p>
+<p>You have <span id="health-count"></span> health.</p>
+
+</div>
+
+<script>
+
+var potato = 0;
+var health = 10;
+var increment;
+
+function updateStats() {
+	document.getElementById("health-count").innerHTML = health;
+	document.getElementById("potato-count").innerHTML = potato;
+}
+
+function decreaseHealth() {
+	if (health > 0) {
+		health--;
+		updateStats();
+	}
+	else {
+		alert("Potato only hallucination of malnourish.\nLatvian peasant die in sadness.");
+		potato = 0;
+		health = 10;
+		updateStats();
+	}
+	
+}
+
+function addPotato() {
+    potato++;
+	updateStats();
+}
+
+document.getElementById("produce-potato").onclick = function() {addPotato()};
+
+window.onload = function game () {
+	updateStats();
+	increment = setInterval (decreaseHealth, 1000);
+}
+
+</script>
+
+</body>
+</html>
